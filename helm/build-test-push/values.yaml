@@ -1,0 +1,21 @@
+app:
+  name: my-quarkus-app
+  namespace: iocanel
+  virtualMachineName: quarkus-dev
+  virtualMachineNamespace: test1
+  cluster:    #
+
+build:
+  native: false
+
+git:
+  branch: main
+  repo: github.com
+  org: iocanel
+  name: my-quarkus-app
+
+image:
+  url: quay.io/ikanello/my-quarkus-app
+  registry:  # NOT USED
+  organization:  # NOT USED
+  name:  # NOT USED

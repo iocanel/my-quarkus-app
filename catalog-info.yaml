@@ -1,0 +1,43 @@
+
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: my-quarkus-app
+  description: A cool quarkus app
+  annotations:
+    argocd/app-name: my-quarkus-app-bootstrap
+    backstage.io/kubernetes-id: my-quarkus-app
+    # It must be commented otherwise we cannot see the Tekton pipelines resources
+    # backstage.io/kubernetes-namespace: iocanel
+    backstage.io/source-location: url:https://github.com/iocanel/my-quarkus-app
+    # The janus-idp.io/tekton allows to set the boolean value: isTektonCIAvailable which is used within the UI to enable/disable the TektonCIComponent
+    janus-idp.io/tekton: my-quarkus-app
+    backstage.io/techdocs-ref: dir:.
+    github.com/project-slug: iocanel/
+    # See: topology annotation: https://github.com/janus-idp/backstage-plugins/tree/main/plugins/topology
+    app.kubernetes.io/name: quarkus
+    app.quarkus.io/quarkus-version: ""
+  tags:
+    - java
+    - quarkus
+  links:
+    - url: https://my-quarkus-app-iocanel.apps.qshift.snowdrop.dev/
+      title: Quarkus application url
+      icon: web
+spec:
+  type: service
+  lifecycle: production
+  owner: user:guest
+  providesApis: [my-quarkus-app-api]
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: my-quarkus-app-api
+  description: A cool quarkus app
+spec:
+  type: openapi
+  lifecycle: production
+  owner: user:guest
+  definition: 
+    $text: openapi.yaml
